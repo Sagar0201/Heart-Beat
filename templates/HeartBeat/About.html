@@ -1,0 +1,68 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}About{%endblock%}
+{% block tag %}
+<link href="{%static 'css/form.css'%}" rel="stylesheet">
+{% endblock %}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+    .AboutContainer{
+        padding:2rem;
+        min-height:45vh;
+        margin-top:5rem;
+        max-width: 1200px;
+        
+    }
+    .AboutHeading{
+        font-size:2.5rem;
+        margin:1rem;
+    }
+    .AboutDescription{
+        line-height:2rem;
+        letter-spacing:2px;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<section class="BackLinks">
+    <div class="BackLink">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a">About</li>
+        </ul>
+
+    </div>
+</section>
+
+<section class="About">
+    <div class="AboutContainer">
+        <div class="AboutHeading">
+            <h1 style="Font-b">HeartBeat</h1>
+        </div>
+        <div class="AboutDescription">
+            <p>HeartBeat provides lots of high quality songs for free. Music means the world to me. It makes me think about how it relates to life and I love the beats. Music is a way to express yourself, keep you company while you're alone, and always give you something to do. Music is a way of expressing me and being able to relate to other people.</p>
+        </div>
+    </div>
+</section>
+
+
+
+
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

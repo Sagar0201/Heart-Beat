@@ -1,0 +1,49 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}SignIn{%endblock%}
+{% block tag %}
+<link href="{%static 'css/form.css'%}" rel="stylesheet">
+{% endblock %}
+{% block css %}
+<style>
+
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+
+<section class="BackLinks">
+    <div class="BackLink">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a">Sign Up</li>
+        </ul>
+
+    </div>
+</section>
+<section class="Form-a">
+
+    <div class="Form-ab">
+        <div class="formLogo">
+            <h1 class="Font-a Color-a Font-b">HeartBeat</h1>
+        </div>
+        <form action="" class="Form-form" action="/SignUp/" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <input type="text" class="UserId" placeholder="User Id" Name="username" required>
+            <input type="text" class="UserId" placeholder="Frist Name" Name="fname" required>
+            <input type="text" class="UserId" placeholder="Last Name" Name="lname" required>
+            <input type="email" class="UserId" placeholder="Email Address" Name="email" required>
+            <input type="password" class="FormPassword" placeholder="Password" Name="password" required>
+            <button class="button-a">Sign Up</button>
+        </form>
+        <div class="OtherLink">
+            <span class="sign__text">Already have an account ? <a href="{% url 'Login' %}">Sign In!</a></span>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

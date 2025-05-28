@@ -1,0 +1,160 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}Contact{%endblock%}
+{% block tag %}
+<link href="{%static 'css/form.css'%}" rel="stylesheet">
+{% endblock %}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+
+    .ContactHeading {
+        padding: 2rem;
+        font-size: 1.7rem;
+    }
+
+    .ContactInfo {
+        display: flex;
+        justify-content: space-evenly;
+        margin:2rem;
+        /* border: 1px solid red; */
+    }
+
+    .ContactForm {
+        width: 60%;
+        border: 1px solid #222227;
+        border-radius: 20px;
+        padding: 1.5rem;
+    }
+
+    .ContactForm form {
+        display: flex;
+        justify-content: space-evenly;
+        flex-direction: column;
+        width: 100%;
+    }
+    .FormPersonInfo{
+        display:flex;
+        flex-direction: row;
+        width: 100%;
+    }
+    .FormPersonInfo input:first-child{
+        margin-right:0.5rem;
+    }
+    .FormPersonInfo input:nth-child(2){
+        margin-left:0.5rem;
+    }
+
+    .ContactForm form input,
+    textarea {
+        width: 100%;
+        background-color: #222227;
+        border: 1px solid transparent;
+        border-radius: 12px;
+        height: 46px;
+        position: relative;
+        color: #fff;
+        font-size: 16px;
+        padding: 0 20px;
+        margin-top: 1rem;
+    }
+
+    .ContactForm form textarea {
+        height:120px;
+        padding:1rem;
+    }
+    .ContactForm form button{
+        margin:1rem;
+        width:10rem;
+        font-size: 1rem;
+        background:#FF8A65;
+        color:#fff;
+        transition: all 0.5s ease;
+    }
+
+    .ContactAddInfo{
+        width:40%;
+        padding:1rem;margin:1rem;
+    }
+    .ContactAddInfo h1{
+        font-size:2rem;
+        text-transform: capitalize;
+    }
+    .ContactAddInfo p{
+        margin:1rem 0;
+        line-height:1.5rem;
+    }
+    .SocialIcons{
+        list-style: none;
+        display:flex;
+        align-items:center;
+    }
+    .SocialIcons i{
+        margin:1rem;
+        font-size:1.5rem;
+    }
+    .ContactAddInfo a:hover{
+        color:#FF8A65;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+
+<section class="BackLinks">
+    <div class="BackLink">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a">Contact</li>
+        </ul>
+
+    </div>
+</section>
+<section class="Contact">
+    <div class="ContactHeading">
+        <h2 class="Font-b">Contact</h2>
+    </div>
+    <div class="ContactInfo">
+        <div class="ContactForm">
+            <form action="" class="Form-form" action="/Contact/" method="get" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="FormPersonInfo">
+                    <input type="text" class="InputMessage" placeholder="Name" Name="Name" required>
+                    <input type="email" class="InputMessage" placeholder="Email" Name="Email" required>
+                </div>
+                <input type="text" class="InputMessage" placeholder="Subject" Name="Subject" required>
+                <textarea name="Message" id="InputMessage" cols="30" rows="10" placeholder="Message"></textarea>
+                <button class="button-a">Send</button>
+            </form>
+        </div>
+        <div class="ContactAddInfo">
+            <h1 InfoHeading>Info</h1>
+            <p class="InfoDescription">Suno Tho HeartBeat Ki Karo Maan Ki.<br> Music is a way to express yourself, keep you company while you're alone, and always give you something to do.” “Music is a way of expressing me and being able to relate to other people.</p>
+            <p><a> Phone No: +91 8637790201</a></p>
+            <p><a>Email Id : sagarkakade0201@gmail.com</a></p>
+            <ul class="SocialIcons">
+                <li><a><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              <li><a><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

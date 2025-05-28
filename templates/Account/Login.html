@@ -1,0 +1,50 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}SignIn{%endblock%}
+{% block tag %}
+<link href="{%static 'css/form.css'%}" rel="stylesheet">
+{% endblock %}
+{% block css %}
+<style>
+
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+
+<section class="BackLinks">
+    <div class="BackLink">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a">Sign In</li>
+        </ul>
+
+    </div>
+</section>
+<section class="Form-a">
+
+    <div class="Form-ab">
+        <div class="formLogo">
+            <h1 class="Font-a Color-a Font-b">HeartBeat</h1>
+        </div>
+        <div class="FormTitle Color-a">
+            <h3>Sign In</h3>
+        </div>
+        <form action="" class="Form-form" action="/Login/" method="post" enctype="multipart/form-data">{% csrf_token %}
+            <input type="text" class="UserId" placeholder="User Id" Name="loginusername" required>
+            <input type="password" class="FormPassword" placeholder="Password" Name="loginpassword" required>
+            <button class="button-a">Sign In</button>
+        </form>
+        <div class="OtherLink">
+            <span class="sign__text">Don't have an account ? <a href="{% url 'SignUp' %}">Sign up!</a></span>
+            <span class="sign__text"><a href="{% url 'reset_password' %}">Forgot password?</a></span>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}

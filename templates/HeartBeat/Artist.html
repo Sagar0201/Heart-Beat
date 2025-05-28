@@ -1,0 +1,112 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}About{%endblock%}
+{% block tag %}
+<link href="{%static 'css/form.css'%}" rel="stylesheet">
+{% endblock %}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+    .ArtistInfo{
+      display:flex;
+      align-items: center;
+      justify-content: space-evenly;
+      padding:2rem;
+      margin: 1rem;
+      border-bottom: 1px solid #222227;
+    }
+    .ArtistInfo img{
+      height:8rem;
+    }
+    .ArtistInfo h1{
+      font-size: 3rem;
+    }
+    .NoSogsFund{
+      text-align:center;
+      margin:1rem;
+      font-size:2rem;
+    }
+    .ListsSongs{
+      min-height: 30vh;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<section class="BackLinks">
+    <div class="BackLink">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}#Artists">Artists</a></li>
+            {% for Artist in Artists %}
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a">{{Artist.artist_name}}</li>
+        </ul>
+
+    </div>
+</section>
+
+<section class="Artists">
+  
+    <div class="Artist">
+        <div class="ArtistInfo">
+            <img src="{{Artist.artist_picture.url}}" alt="">
+            <h1 class="ArtistName Font-b">
+              {{Artist.artist_name}}
+            </h1>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
+<section class="SongsPlaylist">
+    <div class="SongsHeading ">
+      <li class="SongCat Font-b">Songs List</li>
+      <!-- <a>See all <i class="fa-solid fa-arrow-right"></i></a> -->
+    </div>
+    
+    <div class="ListsSongs">
+      {% if Musics %}
+      {% for Music in Musics %}
+      <div class="ListSongCard" id="ListSongCard">
+        <div class="ListSongInfo">
+          <img id="MusicImg{{Music.id}}" src="{{Music.song_image.url}}" alt="">
+          <div class="ListSong">
+            <h4 class="ListSongName" id="MusicName{{Music.id}}">{{Music.song_name}}</h4>
+            <h5 class="ListSongArtist" id="MusicArtist{{Music.id}}">{{Music.artist.artist_name}}</h5>
+            <source  id="MusicSrc{{Music.id}}" src="{{Music.song_file.url}}" type="audio/ogg">
+          </div>
+        </div>
+        <div class="ListSongTime">
+          03:44
+          <div class="ListSongPlayBtn" id="PlaySongL{{Music.id}}" onclick="Song('{{Music.id}}')"><i class="fa fa-play-circle"></i></div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="NoSogsFund ">
+        <h1 class="Font-b">Zero Songs Upload For This Artist</h1>
+      </div>
+      {% endif %}
+    </div>
+
+  </section>
+
+
+
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}

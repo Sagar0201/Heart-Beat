@@ -1,0 +1,210 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}HeartBeat{%endblock%}
+{% block css %}
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+</style>
+{% endblock %}
+
+{%block body%}
+
+<section class="HomePage" id="Home">
+
+  <div class="slideshow-container">
+
+    <div class="mySlides fade" style="background-image:url({%static 'Images/2.jpg' %})">
+      <div class="Welcome">
+        <h1 class="WelcomeHeading Font-b">Welcome To HeartBeat</h1>
+        <p class="WelcomeText Font-a">Music means the world to me. It makes me think about how it relates to life and I
+          love the beats. Music is a way to express yourself, keep you company while you're alone, and always give you
+          something to do. Music is a way of expressing me and being able to relate to other people.</p>
+        <button  class="button-a Font-b"><a class="Color-c" href="#Releases">Releases</a></button>
+      </div>
+    </div>
+
+    <div class="mySlides fade" style="background-image:url({%static 'Images/slide3.jpg' %})">
+      <div class="Welcome">
+        <h1 class="WelcomeHeading Font-b">Welcome To HeartBeat</h1>
+        <p class="WelcomeText Font-a">Music means the world to me. It makes me think about how it relates to life and I
+          love the beats. Music is a way to express yourself, keep you company while you're alone, and always give you
+          something to do. Music is a way of expressing me and being able to relate to other people.</p>
+        <button  class="button-a"><a class="Color-c" href="#Artists">Artists</a></button>
+      </div>
+    </div>
+
+    <div class="mySlides fade" style="background-image:url({%static 'Images/8.jpg' %})">
+      <div class="Welcome">
+        <h1 class="WelcomeHeading Font-b">Welcome To HeartBeat</h1>
+        <p class="WelcomeText Font-a">Music means the world to me. It makes me think about how it relates to life and I
+          love the beats. Music is a way to express yourself, keep you company while you're alone, and always give you
+          something to do. Music is a way of expressing me and being able to relate to other people.</p>
+        <button  class="button-a"><a class="Color-c" href="#Songs">Songs</a></button>
+      </div>
+    </div>
+    <div class="ChangeBtn ">
+      <a class="prev" onclick="plusSlides(-1)"><i class="fa-solid fa-arrow-left"></i></a>
+      <a class="next" onclick="plusSlides(1)"><i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div style="text-align:center" class="ChangeDot">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+    </div>
+
+  </div>
+  <br>
+
+
+</section>
+
+<section class="SongsPlaylist" >
+  <div class="ListsSongs" id="SearchResults">
+  </div>
+</section>
+
+{% if NewReleases %}
+<section class="NewSongs" id="Releases">
+  <div class="SongsHeading ">
+    <li class="SongCat Font-b">New Releases</li>
+    <a>See all <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="Song">
+    <div class="container-a">
+      {% for Music in NewReleases %}
+    {% if forloop.counter <= 10 %}
+      <div class="card">
+        <div class="card-header">
+          <img id="MusicImg{{Music.Newsongs.id}}" src="{{Music.Newsongs.song_image.url}}" alt="rover" />
+        </div>
+        <div class="card-body">
+          <h4 id="MusicName{{Music.Newsongs.id}}">{{Music.Newsongs.song_name}}</h4>
+          <h5 id="MusicArtist{{Music.Newsongs.id}}">{{Music.Newsongs.artist.artist_name}}</h5>
+          <source  id="MusicSrc{{Music.Newsongs.id}}" src="{{Music.Newsongs.song_file.url}}" type="audio/ogg">
+          <li class="SongPlayButton" id="PlaySong{{Music.Newsongs.id}}" onclick="Song('{{Music.Newsongs.id}}')"><i class="fa fa-play-circle"></i></li>
+        </div>
+      </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="Artists" id="Artists">
+  <div class="SongsHeading ">
+    <li class="SongCat Font-b">Artists</li>
+    <a>See all <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="Song">
+    <div class="container-a">
+      {% for Artist in Artists %}
+      <div class="card">
+        <div class="card-header">
+          <img src="{{Artist.artist_picture.url}}" alt="rover"/>
+        </div>
+        <div class="card-body">
+          <h4 class="ArtistsNames"><a href="{% url 'Artist' %}?Artist={{Artist.id}}">{{Artist.artist_name}}</a></h4>
+        </div>
+      </div>
+
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+<section class="SongsPlaylist" id="Songs">
+  <div class="SongsHeading ">
+    <li class="SongCat Font-b">Songs List</li>
+    <a>See all <i class="fa-solid fa-arrow-right"></i></a>
+  </div>
+  <div class="ListsSongs">
+    {% for Music in Musics %}
+    <div class="ListSongCard" id="ListSongCard">
+      <div class="ListSongInfo">
+        <img id="MusicImg{{Music.id}}" src="{{Music.song_image.url}}" alt="">
+        <div class="ListSong">
+          <h4 class="ListSongName" id="MusicName{{Music.id}}">{{Music.song_name}}</h4>
+          <h5 class="ListSongArtist" id="MusicArtist{{Music.id}}">{{Music.artist.artist_name}}</h5>
+          <source  id="MusicSrc{{Music.id}}" src="{{Music.song_file.url}}" type="audio/ogg">
+        </div>
+      </div>
+      <div class="ListSongTime">
+        03:44
+        <div class="ListSongPlayBtn" id="PlaySongL{{Music.id}}" onclick="Song('{{Music.id}}')"><i class="fa fa-play-circle"></i></div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</section>
+
+
+
+
+{%endblock%}
+
+{% block js %}
+
+<script>
+  var slideIndex = 1;
+  showSlides(slideIndex);
+
+  function plusSlides(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    if (n > slides.length) {
+      slideIndex = 1
+    }
+    if (n < 1) {
+      slideIndex = slides.length
+    }
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+  }
+
+  var slideIndex = 0;
+  showSlides();
+
+  function showSlides() {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    var dots = document.getElementsByClassName("dot");
+    for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+      slideIndex = 1
+    }
+    for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+    }
+    slides[slideIndex - 1].style.display = "block";
+    dots[slideIndex - 1].className += " active";
+    setTimeout(showSlides, 9000); // Change image every 5 seconds
+  }
+</script>
+
+
+{% endblock %}

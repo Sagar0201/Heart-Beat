@@ -1,0 +1,102 @@
+    .BackLinks{
+        flex: 0 0 100%;
+        max-width: 100%;
+        padding-left:2rem;
+    }
+    .breadcrumb {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: center;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+        @media (min-width: 1200px){ .breadcrumb {
+        margin-top: 25px;
+    }}
+
+    .breadcrumb__item {
+        font-size: 17px;
+        color: #c0c0c0;
+        transition: 0.5s ease;
+        position: relative;
+        margin-right: 20px;
+        list-style:none;
+    }
+    .Form-a{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        padding:1rem;
+        width: 100%;
+        min-height: 80vh;
+        height: 100%;
+    }
+    
+    .Form-ab {
+        background-color: #16151a;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        border-radius: 12px;
+        padding: 50px 20px;
+        position: relative;
+        width: 100%;
+        max-width: 350px;
+        border: 1px solid #222227;
+    }
+    .formLogo{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding:1.5rem;
+        font-size:36px;
+    }
+
+    .Form-ab .Form-form {
+            display: flex;
+            align-items:center;
+            justify-content: center;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+    }
+    .Form-ab .Form-form input{
+            background-color: #222227;
+            border: 1px solid transparent;
+            border-radius: 12px;
+            height: 46px;
+            position: relative;
+            color: #fff;
+            font-size: 16px;
+            width: 100%;
+            padding: 0 20px;
+            margin-top:1rem;
+    }
+    .Form-ab .Form-form input:focus{
+        border: 1px solid #FF8A65;
+    }
+    .Form-ab .Form-form button{
+        margin-top:1rem;
+        padding: 0.5rem 2.5rem;
+        background: linear-gradient(to right top, #fff, #FF8A65);
+    }
+    .OtherLink{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .sign__text a{
+        color:#FF8A65;
+    }
+
+    .sign__text {
+        margin-top: 15px;
+        font-size: 14px;
+        line-height: 24px;
+        color: #fff;
+        width: 100%;
+        text-align: center;
+    }

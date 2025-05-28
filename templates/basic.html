@@ -1,0 +1,694 @@
+{% load static %}
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <meta content="" name="keywords" />
+  <meta content="" name="description" />
+
+  <link rel="stylesheet" href="{%static 'Css/HeartBeat.css'%}" />
+
+  <!-- Favicons -->
+  <link href="{%static 'Images/img-01.png'%}" rel="icon" />
+  <link href="{%static 'Images/1.jpg'%}" rel=" apple-touch-icon" />
+
+  <script src="https://kit.fontawesome.com/1698c46605.js" crossorigin="anonymous"></script>
+
+
+  <link href="{%static 'lib/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'lib/animate/animate.min.css'%}" rel="stylesheet">
+  <link href="{%static 'lib/ionicons/css/ionicons.min.css'%}" rel="stylesheet">
+  <link href="{%static 'lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+  {% block tag %} {% endblock %}
+
+  <title>{% block title %} {% endblock %}</title>
+</head>
+<style>
+  .player {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border-top: 1px solid #222227;
+  }
+
+  .details {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 25px;
+  }
+
+  .track-art {
+    background-size: cover;
+    background-position: center;
+
+  }
+
+  .track-art img {
+    margin: 10px 25px;
+    height: 120px;
+    width: 150px;
+    border-radius: 15%;
+  }
+
+  /* Changing the font sizes to suitable ones */
+  .now-playing {
+    font-size: 1rem;
+  }
+
+  .track-name {
+    font-size: 1.5rem;
+  }
+
+  .track-artist {
+    font-size: 1rem;
+  }
+
+  /* Using flex with the row direction to
+   align items in a horizontal direction */
+  .buttons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+
+  .playpause-track,
+  .prev-track,
+  .next-track {
+    padding: 25px;
+    opacity: 0.8;
+
+    /* Smoothly transition the opacity */
+    transition: opacity 0.2s;
+  }
+
+  /* Change the opacity when mouse is hovered */
+  .playpause-track:hover,
+  .prev-track:hover,
+  .next-track:hover {
+    opacity: 1;
+  }
+
+  /* Define the slider width so that it scales properly */
+  .slider_container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* Modify the appearance of the slider */
+  .seek_slider,
+  .volume_slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: black;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+  }
+
+  /* Modify the appearance of the slider thumb */
+  .seek_slider::-webkit-slider-thumb,
+  .volume_slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: white;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  /* Change the opacity when mouse is hovered */
+  .seek_slider:hover,
+  .volume_slider:hover {
+    opacity: 1;
+  }
+
+  .seek_slider {
+    width: 60%;
+  }
+
+  .volume_slider {
+    width: 30%;
+  }
+
+  .current-time,
+  .total-duration {
+    padding: 10px;
+  }
+
+  i.fa-volume-down,
+  i.fa-volume-up {
+    padding: 10px;
+  }
+
+  /* Change the mouse cursor to a pointer
+   when hovered over */
+  i.fa-play-circle,
+  i.fa-pause-circle,
+  i.fa-step-forward,
+  i.fa-step-backward {
+    cursor: pointer;
+  }
+
+
+
+
+  /* ##########################
+            Footer
+  ############################# */
+  .footer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid #222227;
+  }
+
+  .FooterBar {
+    width: 100%;
+    max-width: 1000px;
+    height: 100%;
+    border-bottom: 1px solid #222227;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+  }
+
+  .FooterBar a:hover {
+    color: #FF8A65;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .FooterBar i:hover {
+    color: #FF8A65;
+    transition: all 0.5s ease-in-out;
+  }
+
+  .FooterMenu {
+    width: 100%;
+  }
+
+  .FooterMenu ul {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    flex-direction: row;
+    list-style: none;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .FooterMenu ul li {
+    margin: 1rem;
+  }
+
+  .FooterSocialIcons {
+    width: 100%;
+  }
+
+  .FooterSocialIcons ul {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    list-style: none;
+  }
+
+  .FooterSocialIcons i {
+    font-size: 1rem;
+    color: #fff;
+    margin: 1rem;
+  }
+
+  .CopyRight {
+    margin-top: 1rem;
+  }
+
+  .copyright-footer {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  .copyright-footer span {
+    font-size: 1.5rem;
+  }
+
+  .credits {
+    width: 100%;
+    text-align: center;
+    padding: 0.5rem;
+  }
+
+  .credits span {
+    font-size: 1.5rem;
+  }
+
+  
+</style>
+{%block css%} {%endblock%}
+
+<body>
+  <section class="bodydesigns">
+    {% if messages %}
+    {% for message in messages %}
+    <div id="popup1" class="popup1">
+        <div class="popup">
+            <h2>{{ message.tags }}</h2>
+            <a onclick="popup()" class="Close"><i class="fa-solid fa-circle-xmark"></i></a>
+            <div class="content">
+                {{message}}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+</section>
+
+
+  <section class="HeartBeat" id="HeartBeat">
+    <section class="SideBar">
+      <div class="Logo">
+        <h1 class="LogoHeading FontSize-a Color-a Font-b">HeartBeat</h1>
+      </div>
+      <ul class="SideBarItems Color-a">
+        <li class="SideBarItem FontSize-b">
+          <a href="{% url 'home' %}#Home" class="SideBarItemLink Active"><i
+              class="fa-solid fa-house"></i><span>Home</span></a>
+        </li>
+        <li class="SideBarItem FontSize-b">
+          <a href="{% url 'home' %}#Releases" class="SideBarItemLink"><i class="fa-solid fa-music"></i><span>Releases</span></a>
+        </li>
+        <li class="SideBarItem FontSize-b">
+          <a href="#" class="SideBarItemLink"><i class="fa-solid fa-calendar-days"></i><span>Albums</span></a>
+        </li>
+        <li class="SideBarItem FontSize-b">
+          <a href="{% url 'home' %}#Artists" class="SideBarItemLink"><i class="fa-solid fa-user-group"></i><span>Artists</span></a>
+        </li>
+        <li class="SideBarItem FontSize-b">
+          <a href="{% url 'Profile' %}#Favourites" class="SideBarItemLink"><i class="fa-solid fa-heart"></i><span>Favourites</span></a>
+        </li>
+      </ul>
+      <div class="main">
+
+        <div class="player">
+          <!-- Define the section for displaying details -->
+          <div class="details">
+            <div class="track-art">
+              <img id="MusicImg" src="{% static 'Images/MasterImg.jpg' %}" alt="">
+            </div>
+            <div class="track-name Font-b"></div>
+            <div class="track-artist"></div>
+          </div>
+
+          <!-- Define the section for displaying track buttons -->
+          <div class="buttons">
+            <div class="prev-track" onclick="prevTrack()">
+              <i class="fa fa-step-backward fa-2x"></i>
+            </div>
+            <div class="playpause-track" onclick="PlayPause()">
+              <i class="fa fa-play-circle fa-3x"></i>
+            </div>
+            <div class="next-track" onclick="nextTrack()">
+              <i class="fa fa-step-forward fa-2x"></i>
+            </div>
+          </div>
+
+          <!-- Define the section for displaying the seek slider-->
+          <div class="slider_container">
+            <div class="current-time">00:00</div>
+            <input type="range" min="1" max="100" value="0" class="seek_slider" onchange="seekTo()" />
+            <div class="total-duration">00:00</div>
+          </div>
+
+          <!-- Define the section for displaying the volume slider-->
+          <div class="slider_container">
+            <i class="fa fa-volume-down"></i>
+            <input type="range" min="1" max="100" value="99" class="volume_slider" onchange="setVolume()" />
+            <i class="fa fa-volume-up"></i>
+          </div>
+        </div>
+
+      </div>
+      <!-- </div> -->
+    </section>
+    <section class="Content">
+      <section class="Nav">
+        <header class="TopNavbar">
+          <div class="TopNavItem">
+            <ul class="NavOptions">
+              <li class="Option">
+                <a href="{% url 'Profile' %}" class="SideBarItemLink Active">Profile</a>
+              </li>
+              <li class="Option">
+                <a href="{% url 'About' %}" class="SideBarItemLink Active">About</a>
+              </li>
+              <li class="Option">
+                <a href="{% url 'Contact' %}" class="SideBarItemLink Active">Contact</a>
+              </li>
+            </ul>
+            <div class="TopNavSearch">
+              <form method="POST" class="TopNavSearchForm" id="commentForm">{% csrf_token %}
+                <input type="text" placeholder="Artist, track or podcast" name="Query" />
+                <button type="submit">
+                  <a><i class="fa-solid fa-magnifying-glass"></i></a>
+                </button>
+                <!-- <button type="button" class="close">
+                  <i class="fa-solid fa-xmark"></i>
+                </button> -->
+              </form>
+            </div>
+
+          </div>
+
+          <div class="TopNavUserInfo">
+            <ul class="UserInfo">
+              {% if request.user.username == "" %}
+              <li class="User Color-a">
+                <a href="{% url 'Login' %}" class="SideBarItemLink Active">Sign In <i
+                    class="fa-solid fa-arrow-right-to-bracket"></i></a>
+              </li>
+              {% else %}
+
+              <li class="User Color-a">
+                <a href="{% url 'Profile' %}" class="SideBarItemLink Active" style="text-transform: capitalize">{{request.user.username}}<i
+                    class="fa-solid fa-user"></i></a>
+              </li>
+              {% endif %}
+            </ul>
+          </div>
+        </header>
+      </section>
+
+
+      {%block body%} {%endblock%}
+
+      <footer class="footer">
+        <div class="FooterBar">
+          <div class="FooterMenu">
+            <ul class="FooterItems">
+              <li><a href="{% url 'home' %}#Home">Home</a></li>
+              <li><a href="{% url 'Profile' %}">Profile</a></li>
+              <li><a href="{% url 'About' %}">About</a></li>
+              <li><a href="{% url 'Contact' %}">Contact</a></li>
+            </ul>
+          </div>
+          <div class="FooterSocialIcons">
+            <ul>
+              <li><a><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+              <li><a><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+              <li><a><i class="fa-brands fa-linkedin" aria-hidden="true"></i></a></li>
+              <li><a><i class="fa-brands fa-github" aria-hidden="true"></i></a></li>
+            </ul>
+          </div>
+        </div>
+        <div class="CopyRight">
+          <div class="copyright-footer">
+            <p class="copyright color-text-a">
+              © Copyright
+              <span class="Color-c Font-b">HeartBeat</span> All Rights Reserved.
+            </p>
+          </div>
+          <div class="credits">
+            Designed by <a href="https://www.instagram.com/_sagar_0201_/"><span class="Font-b Color-c">Sagar
+                Kakade</span></a>
+          </div>
+        </div>
+      </footer>
+
+
+    </section>
+  </section>
+
+  <!-- JavaScript Libraries -->
+  <script src="{%static 'JavaScript/HeartBeat.js'%}"></script>
+
+  <script>
+    let track_name = document.querySelector(".track-name");
+    let track_img = document.querySelector("#MusicImg");
+    let track_artist = document.querySelector(".track-artist");
+    let playpause_track = document.querySelector(".playpause-track");
+
+    let seek_slider = document.querySelector(".seek_slider");
+    let volume_slider = document.querySelector(".volume_slider");
+    let curr_time = document.querySelector(".current-time");
+    let total_duration = document.querySelector(".total-duration");
+
+    let curr_track = document.createElement("audio");
+    let tracking_song_id;
+    let current_song_id;
+    let isPlaying = false;
+    let updateTimer;
+
+    
+
+
+    {% for Music in LastPlaySong %}
+    curr_track.src ="{{Music.last_play_song.song_file.url}}";
+    track_img.src = "{{Music.last_play_song.song_image.url}}";
+    track_name.textContent = "{{Music.last_play_song.song_name}}";
+    track_artist.textContent = "{{Music.last_play_song.artist.artist_name}}";
+    tracking_song_id ="{{Music.last_play_song.id}}"
+    {% endfor %}
+
+    clearInterval(updateTimer);
+    resetValues();
+    curr_track.load();
+    updateTimer = setInterval(seekUpdate, 1000);
+    // curr_track.addEventListener("ended", nextTrack);
+
+
+
+    function Song(id) {
+      tracking_song_id=id;
+      // console.log(id)
+      curr_track.src = document.getElementById("MusicSrc" + tracking_song_id).getAttribute('src');
+      track_img.src = document.getElementById("MusicImg" + tracking_song_id).getAttribute('src');
+      track_name.textContent = document.getElementById("MusicName" + tracking_song_id).innerHTML;
+      track_artist.textContent = document.getElementById("MusicArtist" + tracking_song_id).innerHTML;
+
+      if (current_song_id == id) {
+        PlayPause();
+      } else {
+        Play();
+      }
+    }
+
+    curr_track.addEventListener("ended", nextTrack);
+    function resetValues() {
+      curr_time.textContent = "00:00";
+      total_duration.textContent = "00:00";
+      seek_slider.value = 0;
+      LastPlayTime=0;
+    }
+
+    function PlayPause() {
+      if (!isPlaying) {
+        Play();
+      } else {
+        Pause();
+      }
+    }
+
+    function Play() {
+      // Play the loaded track
+      // console.log(current_song_id)
+      curr_track.play();
+      current_song_id=tracking_song_id;
+      isPlaying = true;
+      // Replace icon with the pause icon
+      if(document.getElementById("PlaySong" + tracking_song_id)){
+
+        document.getElementById("PlaySongL" + tracking_song_id).innerHTML = '<i class="fa fa-pause-circle"></i>';
+        document.getElementById("PlaySong"+tracking_song_id).innerHTML = '<i class="fa fa-pause-circle"></i>';
+      }
+      
+      playpause_track.innerHTML = '<i class="fa fa-pause-circle fa-3x"></i>';
+    }
+
+    function Pause() {
+      // Pause the loaded track
+      curr_track.pause();
+      isPlaying = false;
+      // Replace icon with the play icon
+      if(document.getElementById("PlaySong" + tracking_song_id)){
+
+        document.getElementById("PlaySongL" + tracking_song_id).innerHTML = '<i class="fa fa-play-circle"></i>';
+        document.getElementById("PlaySong" + tracking_song_id).innerHTML = '<i class="fa fa-play-circle"></i>';
+      }
+      playpause_track.innerHTML = '<i class="fa fa-play-circle fa-3x"></i>';
+    }
+    function nextTrack() {
+  // Go back to the first track if the
+  // current one is the last in the track list
+    tracking_song_id= parseInt(tracking_song_id);
+    tracking_song_id= tracking_song_id+1;
+
+    var myEle = document.getElementById("MusicName" + tracking_song_id);
+if(myEle  == null){
+  tracking_song_id=1;
+}
+    curr_track.src = document.getElementById("MusicSrc" + tracking_song_id).getAttribute('src');
+    track_img.src = document.getElementById("MusicImg" + tracking_song_id).getAttribute('src');
+    track_name.textContent = document.getElementById("MusicName" + tracking_song_id).innerHTML;
+    track_artist.textContent = document.getElementById("MusicArtist" + tracking_song_id).innerHTML;
+    Play();
+}
+
+function prevTrack() {
+    if (tracking_song_id <=1){
+      tracking_song_id=1;
+    }else{
+      tracking_song_id= tracking_song_id-1;
+    }
+    tracking_song_id= parseInt(tracking_song_id);
+    console.log(tracking_song_id)
+    curr_track.src = document.getElementById("MusicSrc" + tracking_song_id).getAttribute('src');
+    track_img.src = document.getElementById("MusicImg" + tracking_song_id).getAttribute('src');
+    track_name.textContent = document.getElementById("MusicName" + tracking_song_id).innerHTML;
+    track_artist.textContent = document.getElementById("MusicArtist" + tracking_song_id).innerHTML;
+    Play();
+  }
+
+
+    function seekTo() {
+  // Calculate the seek position by the
+  // percentage of the seek slider
+  // and get the relative duration to the track
+    seekto = curr_track.duration * (seek_slider.value / 100);
+
+  // Set the current track position to the calculated seek position
+  curr_track.currentTime = seekto;
+}
+
+    function setVolume() {
+      // Set the volume according to the
+      // percentage of the volume slider set
+      curr_track.volume = volume_slider.value / 100;
+    }
+
+
+    function seekUpdate() {
+      let seekPosition = 0;
+
+      // Check if the current track duration is a legible number
+      if (!isNaN(curr_track.duration)) {
+        seekPosition = curr_track.currentTime * (100 / curr_track.duration);
+        seek_slider.value = seekPosition;
+
+        // Calculate the time left and the total duration
+        let currentMinutes = Math.floor(curr_track.currentTime / 60);
+        let currentSeconds = Math.floor(
+          curr_track.currentTime - currentMinutes * 60
+        );
+        let durationMinutes = Math.floor(curr_track.duration / 60);
+        let durationSeconds = Math.floor(
+          curr_track.duration - durationMinutes * 60
+        );
+
+        // Add a zero to the single digit time values
+        if (currentSeconds < 10) {
+          currentSeconds = "0" + currentSeconds;
+        }
+        if (durationSeconds < 10) {
+          durationSeconds = "0" + durationSeconds;
+        }
+        if (currentMinutes < 10) {
+          currentMinutes = "0" + currentMinutes;
+        }
+        if (durationMinutes < 10) {
+          durationMinutes = "0" + durationMinutes;
+        }
+
+        // Display the updated duration
+        curr_time.textContent = currentMinutes + ":" + currentSeconds;
+        total_duration.textContent = durationMinutes + ":" + durationSeconds;
+      }
+    }
+
+
+
+    // updateTimer = setInterval(seekUpdate, 1000);
+    // curr_track.addEventListener("ended", nextTrack);
+  </script>
+
+
+<script>
+  function popup() {
+    document.getElementById("popup1").style.display = "none";
+  }
+</script>
+
+<script>
+  let form = document.getElementById('commentForm')
+  let resultBox = document.getElementById('SearchResults')
+  form.addEventListener('submit', stopReload)
+  function stopReload(e) {
+    e.preventDefault()
+    $.ajax({
+      type: "POST",
+      url: "{% url 'home' %}",
+      data : $("#commentForm").serialize(),
+      dataType:"json",
+      success: (res)=>{
+        console.log(res.data)
+        const data = res.data
+        if(Array.isArray(data)){
+          resultBox.innerHTML+=""
+          data.forEach(song=>{
+            resultBox.innerHTML +=`
+            <div class="ListSongCard" id="ListSongCard">
+              <div class="ListSongInfo">
+                <img id="MusicImg${song.song_id}" src="${song.song_image}" alt="">
+                <div class="ListSong">
+                  <h4 class="ListSongName" id="MusicName{{Music.id}}">${song.song_name}</h4>
+                  <h5 class="ListSongArtist" id="MusicArtist{{Music.id}}">${song.artist}</h5>
+                  <source  id="MusicSrc${song.song_id}" src="${song.song}" type="audio/ogg">
+                </div>
+              </div>
+              <div class="ListSongTime">
+                03:44
+                <div class="ListSongPlayBtn" id="PlaySongL${song.song_id}" onclick="Song('${song.song_id}')"><i class="fa fa-play-circle"></i></div>
+              </div>
+            </div>
+          `
+        }
+        )
+        }
+      }
+    })
+  }
+</script>
+
+  <!-- JavaScript Libraries -->
+  <script src="{%static 'lib/jquery/jquery.min.js'%}"></script>
+  <script src="{%static 'lib/jquery/jquery-migrate.min.js'%}"></script>
+  <script src="{%static 'lib/popper/popper.min.js'%}"></script>
+  <script src="{%static 'lib/bootstrap/js/bootstrap.min.js'%}"></script>
+  <script src="{%static 'lib/easing/easing.min.js'%}"></script>
+  <script src="{%static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+  <script src="{%static 'lib/scrollreveal/scrollreveal.min.js'%}"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  {% block js %} {% endblock %}
+</body>
+
+</html>

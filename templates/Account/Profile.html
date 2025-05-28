@@ -1,0 +1,137 @@
+{% extends 'basic.html' %}
+{% load static %}
+{%block title%}About{%endblock%}
+{% block tag %}
+<link href="{%static 'css/form.css'%}" rel="stylesheet">
+{% endblock %}
+{% block css %}
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'poppins', sans-serif;
+    }
+    .ProfileHeading{
+        margin:2rem;
+        font-size:2.5rem;
+    }
+    .ProfileInfo{
+      padding:1rem;
+      margin: 2rem;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      border-radius:10px;
+      border: 1px solid #222227;
+    }
+    .ProfileInfo img{
+        height:3rem;
+        margin-right:1rem;
+        padding:0.5rem;
+        border-radius: 10px;
+        background:#fff;
+    }
+    .User_info{
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        flex-direction:column;
+    }
+    .User_name{
+        font-size:0.7rem;
+    }
+    .NoSogsFund{
+      text-align:center;
+      margin:1rem;
+      font-size:2rem;
+    }
+    .ListsSongs{
+      min-height: 30vh;
+    }
+</style>
+
+
+{% endblock %}
+
+{%block body%}
+<section class="BackLinks">
+    <div class="BackLink">
+
+        <ul class="breadcrumb">
+            <li class="breadcrumb__item Font-a"><a href="{% url 'home' %}">Home</a></li>
+            <li class="breadcrumb__item"><i class="fa-solid fa-chevron-right"></i></li>
+            <li class="breadcrumb__item Font-a">Profile</li>
+        </ul>
+
+    </div>
+</section>
+
+<section class="Artists">
+  
+    <div class="Profile">
+        <div class="ProfileHeading Font-b">
+            Profile
+        </div>
+        <div class="ProfileInfo">
+            <img src="{% static 'Logo/profile.png' %}" alt="">
+            <div class="User_info">
+                {% for user in user %}
+                <h1 class="User_fullname">
+                    {{user.first_name}} {{user.last_name}}
+                </h1>
+                <p class="User_name">{{user.username}}</p>
+            </div>
+                {% endfor %}
+            <div class="User Color-a">
+                <a href="{% url 'SignOut' %}" class="SideBarItemLink Active">Sign Out <i
+                    class="fa-solid fa-arrow-right-to-bracket"></i></a>
+            </div>
+            
+        </div>
+    </div>
+
+</section>
+
+<section class="SongsPlaylist">
+    <div class="SongsHeading" id="Favourites">
+      <li class="SongCat Font-b">favorite Songs</li>
+      <!-- <a>See all <i class="fa-solid fa-arrow-right"></i></a> -->
+    </div>
+    
+    <div class="ListsSongs">
+      {% if Musics %}
+      {% for Music in Musics %}
+      <div class="ListSongCard" id="ListSongCard">
+        <div class="ListSongInfo">
+          <img id="MusicImg{{Music.id}}" src="{{Music.song_image.url}}" alt="">
+          <div class="ListSong">
+            <h4 class="ListSongName" id="MusicName{{Music.id}}">{{Music.song_name}}</h4>
+            <h5 class="ListSongArtist" id="MusicArtist{{Music.id}}">{{Music.artist.artist_name}}</h5>
+            <source  id="MusicSrc{{Music.id}}" src="{{Music.song_file.url}}" type="audio/ogg">
+          </div>
+        </div>
+        <div class="ListSongTime">
+          03:44
+          <div class="ListSongPlayBtn" id="PlaySongL{{Music.id}}" onclick="Song('{{Music.id}}')"><i class="fa fa-play-circle"></i></div>
+        </div>
+      </div>
+      {% endfor %}
+      {% else %}
+      <div class="NoSogsFund ">
+        <h1 class="Font-b">You Don't Add Any Song On favorite.</h1>
+      </div>
+      {% endif %}
+    </div>
+
+  </section>
+
+
+
+{%endblock%}
+
+{% block js %}
+<script>
+
+</script>
+{% endblock %}
